@@ -93,6 +93,20 @@ After 10 epochs of fine-tuning:
 Accuracy improved steadily across all 10 epochs, with most gains in the first 6-7 epochs
 before flattening — suggesting the model was close to convergence by the end.
 
+  **Why accuracy is relatively low:**
+24.3% exact-match is a modest score, and a few factors explain this. First, exact-match
+is a strict metric — the model's Urdu output must match the reference text character-for
+-character to count as correct, so even a single misplaced dot or extra space counts as
+a full miss. Character Error Rate (16.4%) gives a fairer picture, since it measures how
+close the output is rather than requiring a perfect match. Second, our dataset (2,922
+images) is small for fine-tuning a model on a completely different script and script
+direction (right-to-left cursive Urdu vs. the model's original left-to-right English
+training) — deep learning models generally need thousands more examples per category to
+generalize well. Third, performance varies sharply by category (49.5% on natural scene
+text vs. 0% on signboards), showing the model learned some patterns well while others
+(irregular fonts, real-world photo conditions) remain genuinely hard with this amount of
+training data.
+
 **What we'd do differently with more time:**
 - `newspaper`, `synthetic`, and `signboard` categories have very few test samples (7-14
   each), making those scores noisy — more data in these categories is needed before
@@ -102,7 +116,6 @@ before flattening — suggesting the model was close to convergence by the end.
   — targeted augmentation for this category could help.
 - Trying `trocr-base-handwritten` as the starting checkpoint (instead of `-printed`) could
   improve handwritten-category performance specifically.
-
 ## Credit
 
 Built by Zainab Binte Khalid during the Code Saviours ML/AI Internship — Batch SI-26.
