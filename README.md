@@ -24,7 +24,7 @@ a **vision encoder** (reads the image) and a **text decoder** (outputs the chara
 The starting model (`microsoft/trocr-base-printed`) was originally trained to read
 **English** printed text. Through **fine-tuning**, we continued training this model on
 thousands of labeled Urdu images instead, so it learned to recognize Urdu characters
-and words. Our dataset had 2,633 labeled Urdu images across six categories (see Dataset
+and words. Our dataset had 2,922 labeled Urdu images across six categories (see Dataset
 section below). We trained for 10 epochs, saving a checkpoint after each one, and
 evaluated performance on a held-out test set the model never saw during training.
 
@@ -58,10 +58,10 @@ app runs — no manual model download needed.
 
 ## Dataset details
 
-- **Total images:** 2,633
+- **Total images:** 2,922
 - **Categories:** natural scene text, clean printed text, handwritten text, newspaper
   headlines, synthetic text, and signboards
-- **Split:** 2,106 training images / 527 test images
+- **Split:**  2,337 training / 585 test
 - **Sources:** newspaper clippings, handwritten samples, synthetically generated Urdu
   text, and photographed signboards — collected to capture variety in fonts, backgrounds,
   and image quality (clean scans to real-world photos)
