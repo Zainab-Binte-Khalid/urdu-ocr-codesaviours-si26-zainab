@@ -34,9 +34,7 @@ Try it here: [Urdu OCR — Live Demo](https://urdu-ocr-codesaviours-si26-zainab-
 
 Upload an image containing Urdu text and the model will extract and display the text.
 
-![Urdu OCR Demo](demo_screenshot.png)
 <img width="1600" height="786" alt="image" src="https://github.com/user-attachments/assets/00793d72-18b8-4afa-bd1e-93c038e528b1" />
-
 
 ## How to run it locally
 
