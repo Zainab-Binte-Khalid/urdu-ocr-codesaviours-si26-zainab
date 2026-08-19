@@ -17,7 +17,11 @@ Upload an image containing Urdu text and the model will extract and display the 
 
 > Note: HuggingFace Spaces currently requires a paid plan for Gradio/Docker-based apps, so this project is deployed on **Streamlit Community Cloud** instead — fully live and public, no login required.
 
-**Demo video:** [Add your Drive demo video link here]
+**Demo video:** 
+Watch the project demonstration here:
+             https://docs.google.com/videos/d/1ooShbdYkmnUmINtpS9eD9C5P6gI6nifKqZ9t7J0yvI0/play?usp=sharing
+
+> **Note:** The video may appear slightly blurry in the Google Drive preview. For the best video quality, please download the video and watch the downloaded file.
 
 ## How It Works
 
@@ -40,6 +44,20 @@ This project uses TrOCR, an AI model that reads an image and turns it into text.
 **Training loss** dropped from 17.68 to 0.06 over 10 epochs, confirming the model was genuinely learning throughout training.
 
 **Why accuracy is modest:** exact-match is a strict metric — one wrong character fails the whole prediction — so CER (16.4%) is a fairer picture of real performance. The dataset (2,922 images) is also small for teaching a model an entirely new script and reading direction from scratch; production OCR systems typically train on far more data. Performance varies sharply by category — strong on natural scene text, weak on newspaper and signboard images, which had the fewest training examples (under 45 each).
+
+## Why Urdu OCR Is Hard — And Why Accuracy Is Modest
+
+**Urdu itself is a genuinely difficult script for OCR:**
+- It's written in a cursive, connected script (Nastaliq/Naskh) — letter shapes change depending on their position in a word, unlike fixed Latin letters
+- It's read right-to-left, the opposite of the model's original English training
+- Small dots and marks (nuqta) change a letter's meaning entirely and are easy to misread
+- Real-world Urdu text appears in wildly different forms — clean print, handwriting, worn signboards — each needing different visual understanding
+
+**Why this specific model's accuracy is modest (24.3% exact-match):**
+1. **Exact-match is a strict metric** — the entire prediction must be character-perfect. Character Error Rate (16.4%) is a fairer measure, showing the model gets most characters right even when not flawless.
+2. **Small dataset for the task** — 2,922 images is limited for teaching a model an entirely new script from scratch; production-grade OCR systems train on hundreds of thousands to millions of examples.
+3. **Category imbalance** — categories like newspaper and signboard had under 45 training images each, far fewer than printed text (1,500+) or natural scene (1,000+) — those categories score near 0% exact-match as a direct result.
+4. **Base model mismatch** — TrOCR was originally trained only on English; this project is cross-script transfer learning, which is inherently harder than fine-tuning a model that already understands the target script.
 
 **With more time, we would:** collect substantially more real newspaper and signboard images (the clearest bottleneck), and try `trocr-base-handwritten` as a starting point to specifically improve handwritten text.
 
